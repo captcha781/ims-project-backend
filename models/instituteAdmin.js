@@ -43,10 +43,6 @@ const InstituteAdminModel = new mongoose.Schema(
       required: true,
       enum: ["site-admin", "instituteAdmin"],
     },
-    validTill: {
-      type: Date,
-      required: true,
-    },
     staffWriteAccess: {
       type: Boolean,
       default: false,
@@ -59,6 +55,22 @@ const InstituteAdminModel = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    otp: {
+      type: String,
+      default: ""
+    },
+    otpExpiryTime: {
+      type: Date,
+      default: ""
+    },
+    isStaff: {
+      type: Boolean,
+      default: false
+    },
+    staffId: {
+      type: mongoose.Types.ObjectId,
+      default: ""
+    }
   },
   {
     timestamps: true,

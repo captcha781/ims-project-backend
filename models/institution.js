@@ -64,6 +64,22 @@ const InstitutionSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    groups: {
+      type: [String],
+      default: [],
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    website: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

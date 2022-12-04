@@ -15,12 +15,24 @@ const StudentSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       default: "",
     },
+    group: {
+      type: String,
+      default: ""
+    },
+    studentId: {
+      type: String,
+      default: ""
+    },
+    studentRoll: {
+      type: String,
+      default: ""
+    },
     section: {
       type: String,
       required: true,
     },
     dateOfBirth: {
-      type: String,
+      type: Date,
       required: true,
     },
     fatherName: {
@@ -79,7 +91,7 @@ const StudentSchema = new mongoose.Schema(
     status: {
       type: String,
       default: "active",
-      enum: ["active", "in-active", "archived"],
+      enum: ["active", "in-active", "hold", "archived"],
     },
     address: {
       type: String,
@@ -116,26 +128,36 @@ const StudentSchema = new mongoose.Schema(
     },
     lastActive: {
       type: Date,
-      default: ""
+      default: "",
     },
     fees: {
       type: Number,
-      default: 0
+      default: 0,
     },
     feesTerm: {
       type: [Number],
-      default: []
+      default: [],
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
-      ref: 'instituteAdmins'
+      ref: "instituteAdmins",
+    },
+    instituteId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "institutions",
+    },
+    classRoomId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "classrooms"
     }
   },
   {
     timestamps: true,
     expires: true,
-    expireAfterSeconds: 60*60*24*30
+    expireAfterSeconds: 60 * 60 * 24 * 30,
   }
 );
 

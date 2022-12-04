@@ -10,6 +10,14 @@ const ParentSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    fatherDateOfBirth: {
+      type: Date,
+      default: ''
+    },
+    motherDateOfBirth: {
+      type: Date,
+      default: ""
+    },
     phoneNumber: {
       type: String,
       required: true,
@@ -22,6 +30,10 @@ const ParentSchema = new mongoose.Schema(
       type: [mongoose.Types.ObjectId],
       required: true,
       ref: "students",
+    },
+    multipleKid: {
+      type: Boolean,
+      default: false
     },
     status: {
       type: String,
