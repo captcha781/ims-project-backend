@@ -1,46 +1,41 @@
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const config = require("../config");
 
-const AdminSchema = new mongoose.Schema(
+const ParentSchema = new mongoose.Schema(
   {
-    name: {
+    fatherName: {
       type: String,
       required: true,
     },
-    role: {
+    motherName: {
       type: String,
-      required: true,
-      enum: ["super-admin", "admin", "sub-admin"],
-    },
-    email: {
-      type: String,
-      required: true,
+      default: "",
     },
     phoneNumber: {
       type: String,
       required: true,
+    },
+    alternatePhoneNumber: {
+      type: String,
+      default: "",
+    },
+    children: {
+      type: [mongoose.Types.ObjectId],
+      required: true,
+      ref: "students",
     },
     status: {
       type: String,
       default: "active",
       enum: ["active", "in-active", "hold"],
     },
-    lastActive: {
-      type: Date,
-      default: "",
-    },
     salt: {
       type: String,
       required: true,
     },
-    password: {
-      type: String,
+    createdBy: {
+      type: mongoose.Types.ObjectId,
       required: true,
-    },
-    siteWriteAccess: {
-      type: String,
-      default: false,
+      ref: "instituteAdmins",
     },
   },
   {
@@ -48,9 +43,13 @@ const AdminSchema = new mongoose.Schema(
   }
 );
 
-AdminSchema.methods.generateJWT = function (payload) {
+ParentSchema.methods.generateJWT = function (payload) {
   var token = jwt.sign(payload, config.secretOrKey);
   return `Bearer ${token}`;
 };
 
-module.exports = mongoose.model("admins", AdminSchema, "admins");
+module.exports = mongoose.model(
+    "parents",
+    ParentSchema,
+    "parents"
+)

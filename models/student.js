@@ -115,8 +115,21 @@ const StudentSchema = new mongoose.Schema(
       required: true,
     },
     lastActive: {
-      type: String,
+      type: Date,
       default: ""
+    },
+    fees: {
+      type: Number,
+      default: 0
+    },
+    feesTerm: {
+      type: [Number],
+      default: []
+    },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: 'instituteAdmins'
     }
   },
   {
