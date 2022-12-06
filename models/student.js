@@ -35,13 +35,22 @@ const StudentSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    parentType: {
+      type: String,
+      default: "parent",
+      enum: ["parent", "guardian"],
+    },
     fatherName: {
       type: String,
-      required: true,
+      default: ""
     },
     motherName: {
       type: String,
-      required: true,
+      default: ""
+    },
+    guardianName: {
+      type: String,
+      default: ""
     },
     bloodGroup: {
       type: String,
@@ -73,6 +82,10 @@ const StudentSchema = new mongoose.Schema(
       default: "",
     },
     motherPhoneNumber: {
+      type: String,
+      default: "",
+    },
+    guardianPhoneNumber: {
       type: String,
       default: "",
     },

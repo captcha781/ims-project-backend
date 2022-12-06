@@ -4,19 +4,32 @@ const ParentSchema = new mongoose.Schema(
   {
     fatherName: {
       type: String,
-      required: true,
+      default: "",
     },
     motherName: {
       type: String,
       default: "",
     },
+    guardianName: {
+      type: String,
+      default: "",
+    },
     fatherDateOfBirth: {
       type: Date,
-      default: ''
+      default: "",
     },
     motherDateOfBirth: {
       type: Date,
-      default: ""
+      default: "",
+    },
+    guardianDateOfBirth: {
+      type: Date,
+      default: "",
+    },
+    parentType: {
+      type: String,
+      default: "parent",
+      enum: ["parent", "guardian"],
     },
     phoneNumber: {
       type: String,
@@ -33,7 +46,7 @@ const ParentSchema = new mongoose.Schema(
     },
     multipleKid: {
       type: Boolean,
-      default: false
+      default: false,
     },
     status: {
       type: String,
@@ -60,8 +73,4 @@ ParentSchema.methods.generateJWT = function (payload) {
   return `Bearer ${token}`;
 };
 
-module.exports = mongoose.model(
-    "parents",
-    ParentSchema,
-    "parents"
-)
+module.exports = mongoose.model("parents", ParentSchema, "parents");
