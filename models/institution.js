@@ -9,11 +9,20 @@ const InstitutionSchema = new mongoose.Schema(
     institutionType: {
       type: String,
       required: true,
-      enum: ["primary", "secondary", "higherSecondary", "trainingCenter"],
+      enum: ["Primary", "Secondary", "Higher-Secondary", "Training Center"],
+    },
+    status: {
+      type: String,
+      default:"active",
+      enum: ['active', 'in-active', 'hold']
     },
     address: {
       type: String,
       default: "",
+    },
+    instituteUniqueID: {
+      type: String,
+      required: true
     },
     gstInvoiceNumber: {
       type: String,
@@ -27,10 +36,11 @@ const InstitutionSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    administratorMain: {
-      type: mongoose.Types.ObjectId,
-      ref: "instutionAdmins",
-    },
+    // administratorMain: {
+    //   type: mongoose.Types.ObjectId,
+    //   ref: "instutionAdmins",
+    //   default: "",
+    // },
     createdBy: {
       type: mongoose.Types.ObjectId,
       required: true,
@@ -74,7 +84,7 @@ const InstitutionSchema = new mongoose.Schema(
     },
     website: {
       type: String,
-      required: true,
+      default: "",
     },
     phoneNumber: {
       type: String,

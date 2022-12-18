@@ -12,6 +12,10 @@ const InstituteAdminModel = new mongoose.Schema(
       required: true,
       ref: "institutions",
     },
+    email : {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       default: "active",
@@ -68,7 +72,7 @@ const InstituteAdminModel = new mongoose.Schema(
       default: false
     },
     staffId: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       default: ""
     }
   },
@@ -77,10 +81,10 @@ const InstituteAdminModel = new mongoose.Schema(
   }
 );
 
-InstituteAdminModel.methods.generateJWT = function (payload) {
-  var token = jwt.sign(payload, config.secretOrKey);
-  return `Bearer ${token}`;
-};
+// InstituteAdminModel.methods.generateJWT = function (payload) {
+//   var token = jwt.sign(payload, config.secretOrKey);
+//   return `Bearer ${token}`;
+// };
 
 module.exports = mongoose.model(
     "instituteAdmins",

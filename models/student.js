@@ -12,7 +12,7 @@ const StudentSchema = new mongoose.Schema(
       enum: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
     },
     classInfo: {
-      type: mongoose.Types.ObjectId,
+      type: String,
       default: "",
     },
     group: {
@@ -26,6 +26,10 @@ const StudentSchema = new mongoose.Schema(
     studentRoll: {
       type: String,
       default: ""
+    },
+    instituteCode: {
+      type: String,
+      required: true,
     },
     section: {
       type: String,
@@ -110,6 +114,10 @@ const StudentSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    addressSecondary: {
+      type: String,
+      default: ""
+    },
     town: {
       type: String,
       default: "",
@@ -128,7 +136,7 @@ const StudentSchema = new mongoose.Schema(
     },
     addressType: {
       type: String,
-      default: "",
+      default: "urban",
       enum: ["urban", "village", "town"],
     },
     salt: {
@@ -162,17 +170,29 @@ const StudentSchema = new mongoose.Schema(
       ref: "institutions",
     },
     classRoomId: {
-      type: mongoose.Types.ObjectId,
-      required: true,
+      type: String,
+      // required: true,
+      default:"",
       ref: "classrooms"
+    },
+    profilePhoto: {
+      type: String,
+      default: ""
     }
   },
   {
     timestamps: true,
     expires: true,
-    expireAfterSeconds: 60 * 60 * 24 * 30,
   }
 );
+
+//payload format:
+// {
+//   userId: student._id,
+//   name: ,
+//   instituteId: ,
+//   studentRoll: ,
+// }
 
 StudentSchema.methods.generateJWT = function (payload) {
   var token = jwt.sign(payload, config.secretOrKey);

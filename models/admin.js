@@ -48,9 +48,14 @@ const AdminSchema = new mongoose.Schema(
   }
 );
 
-AdminSchema.methods.generateJWT = function (payload) {
-  var token = jwt.sign(payload, config.secretOrKey);
-  return `Bearer ${token}`;
-};
+/*
+  jwt payload = {
+    adminId: _id,
+  }
+*/
+// AdminSchema.methods.generateJWT = function (payload) {
+//   var token = jwt.sign(payload, config.secretOrKey);
+//   return `Bearer ${token}`;
+// };
 
 module.exports = mongoose.model("admins", AdminSchema, "admins");
