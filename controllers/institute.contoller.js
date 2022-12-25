@@ -66,6 +66,21 @@ exports.signin = expressAsyncHandler(async (req, res) => {
   }
 });
 
+exports.getUser = expressAsyncHandler(async (req, res) => {
+  try {
+    let adminer = await instituteAdmin.findById(req.user._id);
+    adminer.password = "";
+    adminer.salt = "";
+
+    return res.json({ user: adminer });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+});
+
 exports.createStudent = expressAsyncHandler(async (req, res) => {
   try {
     const body = req.body;
@@ -90,45 +105,48 @@ exports.createStudent = expressAsyncHandler(async (req, res) => {
     let password = await bcrypt.hash(date, salt);
 
     let data = {
-        name: body.name,
-        class: body.class,
-        classInfo: body.classInfo,
-        group: body.group,
-        studentId: body.studentId,
-        studentRoll: body.studentRoll,
-        section: body.section,
-        dateOfBirth: body.dateOfBirth,
-        parentType: body.parentType,
-        fatherName: body.fatherName,
-        motherName: body.motherName,
-        guardianName: body.guardianName,
-        bloodGroup: body.bloodGroup,
-        batch: body.batch,
-        email: body.email,
-        emailSecondary: body.emailSecondary,
-        phoneNumber: body.phoneNumber,
-        phoneNumberSecondary: body.phoneNumberSecondary,
-        fatherPhoneNumber: body.fatherPhoneNumber,
-        motherPhoneNumber: body.motherPhoneNumber,
-        guardianPhoneNumber: body.guardianPhoneNumber,
-        address: body.address,
-        addressSecondary: body.addressSecondary,
-        town: body.town,
-        city: body.city,
-        district: body.district,
-        state: body.state,
-        addressType: body.addressType,
-        salt,
-        password,
-        createdBy: req.user._id,
-        instituteId: body.instituteId,
-        classRoomId: body.classRoomId
-    }
+      name: body.name,
+      class: body.class,
+      classInfo: body.classInfo,
+      group: body.group,
+      studentId: body.studentId,
+      studentRoll: body.studentRoll,
+      section: body.section,
+      dateOfBirth: body.dateOfBirth,
+      parentType: body.parentType,
+      fatherName: body.fatherName,
+      motherName: body.motherName,
+      guardianName: body.guardianName,
+      bloodGroup: body.bloodGroup,
+      batch: body.batch,
+      email: body.email,
+      emailSecondary: body.emailSecondary,
+      phoneNumber: body.phoneNumber,
+      phoneNumberSecondary: body.phoneNumberSecondary,
+      fatherPhoneNumber: body.fatherPhoneNumber,
+      motherPhoneNumber: body.motherPhoneNumber,
+      guardianPhoneNumber: body.guardianPhoneNumber,
+      address: body.address,
+      addressSecondary: body.addressSecondary,
+      town: body.town,
+      city: body.city,
+      district: body.district,
+      state: body.state,
+      addressType: body.addressType,
+      salt,
+      password,
+      createdBy: req.user._id,
+      instituteId: body.instituteId,
+      classRoomId: body.classRoomId,
+    };
 
-    const result = await studentModel.create(data)
+    const result = await studentModel.create(data);
 
-    return res.json({success: true, result, message: "Student created successfully"})
-
+    return res.json({
+      success: true,
+      result,
+      message: "Student created successfully",
+    });
   } catch (error) {
     console.log(error);
     return res

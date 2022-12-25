@@ -14,8 +14,9 @@ exports.createSocketIO = async (server) => {
     socketIO.on('connection', async (socket) => {
         // connection
         socket.emit("connection", socket.id)
-
+        
         socket.on("userUpdater", async (userId) => {
+            console.log("Connection");
             // joining the user to rooms
             socket.join(userId)
             // code after successful connection can be written here
@@ -28,6 +29,7 @@ exports.createSocketIO = async (server) => {
 
         socket.on('disconnecting', async (reason) => {
             // disconnection
+            console.log("disconnection");
         });
 
     });
