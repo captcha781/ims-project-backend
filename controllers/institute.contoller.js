@@ -154,3 +154,14 @@ exports.createStudent = expressAsyncHandler(async (req, res) => {
       .json({ success: false, message: "Something went wrong" });
   }
 });
+
+exports.createTeacher = expressAsyncHandler(async (req, res) => {
+  try {
+    return res.json({success: true, reach: "success"})
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Something went wrong" });
+  }
+});

@@ -9,6 +9,14 @@ const experienceSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  organisation: {
+    type: String,
+    default: ""
+  },
+  designation: {
+    type: String,
+    default: ""
+  }
 });
 
 const TeacherSchema = new mongoose.Schema(
@@ -21,6 +29,18 @@ const TeacherSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required: true,
       ref: "institutions",
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true
+    },
+    secondaryPhoneNumber: {
+      type: String,
+      required: true
     },
     education: {
       type: String,
@@ -57,7 +77,7 @@ const TeacherSchema = new mongoose.Schema(
     },
     classroomId: {
       type: mongoose.Types.ObjectId,
-      default: "",
+      required: false,
     },
     subjects: {
       type: [mongoose.Types.ObjectId],
@@ -78,7 +98,8 @@ const TeacherSchema = new mongoose.Schema(
       default: "",
     },
     experience: {
-      type: experienceSchema,
+      type: [experienceSchema],
+      default: []
     },
     lastActive: {
       type: Date,
