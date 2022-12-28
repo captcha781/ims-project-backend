@@ -72,6 +72,8 @@ exports.signin = expressAsyncHandler(async (req, res) => {
 exports.viewUser = expressAsyncHandler(async (req, res) => {
   try {
     let student = await studentModel.findById(req.user._id);
+    student.password = ""
+    student.salt = ""
     return res.json({ user: student });
   } catch (error) {
     console.log(error);

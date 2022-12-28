@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
     // NUM_VERIFY: {
     //   API_KEY: "c90239275a3246e0c6abfc8ad4b87a2f",
     // },
-    CORS_POSSIBLE: ["https://imsproject.netlify.app", "https://teacher-ims.netlify.app", "https://institute-ims.netlify.app", "https://siteadmin-ims.netlify.app"],
+    CORS_POSSIBLE: ["https://imsproject.netlify.app", "https://teacher-ims.netlify.app", "https://institute-ims.netlify.app", "https://siteadmin-ims.netlify.app", "ims-project-student.vercel.app"],
     // //Sms Gateway
     // smsGateway: {
     //     TWILIO_ACCOUT_SID: '',
